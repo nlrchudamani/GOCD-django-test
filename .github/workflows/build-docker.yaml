@@ -3,7 +3,10 @@
 # also this action will update the image tages of the kubernetes deployment repo
 
 name : build docker image 
-on : push
+on : 
+  push:
+    branches:
+      - "main"
 
 env:
   IMAGE_NAME: gocd-django
