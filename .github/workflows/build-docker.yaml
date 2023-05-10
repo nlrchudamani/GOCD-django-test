@@ -1,0 +1,17 @@
+# this file builds the docker image , tags the image with github commit hash 
+# and pushes it to dockerhub 
+# also this action will update the image tages of the kubernetes deployment repo
+
+name : build docker image 
+on : push
+
+jobs:
+  Build_and_push_docker :  
+    runs-on : ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+
