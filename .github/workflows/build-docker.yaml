@@ -38,9 +38,9 @@ jobs:
           tags: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
       - name : checkout k8s repository 
-        uses : actions/checkout
+        uses : actions/checkout@main
         with :
-          repository: nlrchudamani/GOCD-k8s 
+          repository: nlrchudamani/GOCD-k8s@main
 
       - name: Update the image name in the deployment file 
         run: |
