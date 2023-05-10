@@ -12,6 +12,9 @@ env:
   IMAGE_NAME: gocd-django
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  USERNAME: ${{ secrets.USERNAME }}
+  EMAIL: ${{ secrets.EMAIL }}
+
 
 jobs:
   Build_and_push_docker :  
@@ -41,10 +44,16 @@ jobs:
         uses : actions/checkout@main
         with :
           repository: nlrchudamani/GOCD-k8s@main
+          token: ${{ secrets.PAT }}
 
-      - name: Update the image name in the deployment file 
+      - name: Update the image name in the deployment file and push to k8s repository
         run: |
-          'cat "deployment.yaml.template" | sed "s/nlrcmani/gocd-django:latest/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}/g"'
+          cat "deployment.yaml.template" | sed "s/nlrcmani/gocd-django:latest/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}/g"
+          git config --global user.name ${{ env.USERNAME }}
+          git config --global user.email ${{ env.EMAIL }}
+          git add -A
+          git commit -m "commit message"
+          git push
           
           
 
