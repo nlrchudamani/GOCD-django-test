@@ -37,6 +37,15 @@ jobs:
           push: true
           tags: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-      # - name: Docker logout
-      #   uses: docker/logout-action@v1
+      - name : checkout k8s repository 
+        uses : actions/checkout
+        with :
+          repository: nlrchudamani/GOCD-k8s 
 
+      - name: Update the image name in the deployment file 
+        run: |
+          'cat "deployment.yaml.template" | sed "s/nlrcmani/gocd-django:latest/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}/g"'
+          
+          
+
+      
