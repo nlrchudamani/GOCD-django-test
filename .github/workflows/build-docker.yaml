@@ -34,6 +34,6 @@ jobs:
           push: true
           tags: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-      - name: Docker logout
-        uses: docker/logout-action@v1
+      # - name: Docker logout
+      #   uses: docker/logout-action@v1
 
