@@ -41,7 +41,7 @@ jobs:
           tags: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
       - name : checkout k8s repository 
-        uses : actions/checkout@main
+        uses : actions/checkout@master
         with :
           repository: nlrchudamani/GOCD-k8s@main
           token: ${{ secrets.PAT }}
